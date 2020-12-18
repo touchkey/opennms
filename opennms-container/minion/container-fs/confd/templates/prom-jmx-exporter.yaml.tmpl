@@ -1,0 +1,25 @@
+#
+# DON'T EDIT THIS FILE :: GENERATED WITH CONFD
+#
+{{$jmxExporterPath := "/java/agent/prom-jmx-exporter" -}}
+jmxUrl: '{{getv (print $jmxExporterPath "/jmxUrl") "service:jmx:rmi:///jndi/rmi://127.0.0.1:1299/karaf-minion"}}'
+username: {{getv (print $jmxExporterPath "/username") "admin"}}
+password: {{getv (print $jmxExporterPath "/password") "admin"}}
+lowercaseOutputName: {{getv (print $jmxExporterPath "/lowercaseOutputName") "true"}}
+lowercaseOutputLabelNames: {{getv (print $jmxExporterPath "/lowercaseOutputLabelNames") "true"}}
+whitelistObjectNames: {{getv (print $jmxExporterPath "/whitelistObjectNames") `[ "org.opennms.core.ipc.sink.producer:*", "org.opennms.netmgt.dnsresolver.netty:*", "org.opennms.netmgt.telemetry:*" ]`}}
+
+rules:
+# Grab Values as gauges
+- pattern : 'org\.opennms\..+\.(.+)<name=(.+)><>Value'
+  name: minion_$1_$2
+  type: GAUGE
+# Grab Counts with Percentiles as Histograms
+- pattern: 'org\.opennms\..+\.(.+)<name=(.+)><>Count'
+  name: minion_$1_$2_count
+  type: COUNTER
+- pattern: 'org\.opennms\..+\.(.+)<name=(.+)><>(\d+)thPercentile'
+  name: minion_$1_$2
+  type: GAUGE
+  labels:
+    quantile: "0.$3"
