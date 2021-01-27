@@ -4,3 +4,4 @@ dest = "/opt/prom-jmx-exporter/config.yaml"
 keys = [
     "/java/agent/prom-jmx-exporter"
 ]
+reload_cmd = "/opt/minion/confd/scripts/remove-if-empty /opt/prom-jmx-exporter/config.yaml"

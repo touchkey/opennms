@@ -1,6 +1,8 @@
+{{if exists "/java/agent/prom-jmx-exporter" -}}
 #
 # DON'T EDIT THIS FILE :: GENERATED WITH CONFD
 #
+
 {{$jmxExporterPath := "/java/agent/prom-jmx-exporter" -}}
 jmxUrl: '{{getv (print $jmxExporterPath "/jmxUrl") "service:jmx:rmi:///jndi/rmi://127.0.0.1:1299/karaf-minion"}}'
 username: {{getv (print $jmxExporterPath "/username") "admin"}}
@@ -23,3 +25,5 @@ rules:
   type: GAUGE
   labels:
     quantile: "0.$3"
+
+{{end -}}
