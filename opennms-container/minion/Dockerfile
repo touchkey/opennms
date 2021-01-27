@@ -8,7 +8,7 @@ ARG BASE_IMAGE="opennms/deploy-base:jre-1.2.0.b54"
 
 FROM ${BASE_IMAGE} as minion-base
 
-ARG PROM_JMX_EXPORTER_VERSION="0.14.0"
+ARG PROM_JMX_EXPORTER_VERSION="0.15.0"
 ARG PROM_JMX_EXPORTER_URL="https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/${PROM_JMX_EXPORTER_VERSION}/jmx_prometheus_javaagent-${PROM_JMX_EXPORTER_VERSION}.jar"
 
 ADD ./tarball/minion.tar.gz /opt/

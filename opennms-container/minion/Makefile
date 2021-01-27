@@ -22,7 +22,7 @@ REVISION                := $(shell git describe --always)
 BUILD_NUMBER            := "unset"
 BUILD_URL               := "unset"
 BUILD_BRANCH            := $(shell git describe --always)
-PROM_JMX_EXPORTER_VERSION := 0.14.0
+PROM_JMX_EXPORTER_VERSION := 0.15.0
 
 help:
 	@echo ""
