@@ -245,8 +245,8 @@ The default configuration is set to the following values and can be set in the `
 
 ```yaml
 ---
-java
-    agent
+java:
+    agent:
         prom-jmx-exporter:
             jmxUrl: service:jmx:rmi:///jndi/rmi://127.0.0.1:1299/karaf-minion
             username: admin
