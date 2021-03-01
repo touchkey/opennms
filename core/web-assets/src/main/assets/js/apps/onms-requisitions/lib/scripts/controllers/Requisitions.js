@@ -200,8 +200,8 @@ require('../services/Synchronize');
       bootbox.prompt('Please enter the name for the new requisition', function(foreignSource) {
         if (foreignSource) {
           // Validate Requisition
-          if (foreignSource.match(/[/\\?:&*'"]/)) {
-            bootbox.alert('Cannot add the requisition ' + foreignSource + ' because the following characters are invalid:<br/>:, /, \\, ?, &, *, \', "');
+          if (foreignSource.match(/[/\\?:&*'"<>]/)) {
+            bootbox.alert('Cannot add the requisition ' + foreignSource + ' because the following characters are invalid:<br/>:, /, \\, ?, &, *, \', ", <, >');
             return;
           }
           var r = $scope.requisitionsData.getRequisition(foreignSource);
