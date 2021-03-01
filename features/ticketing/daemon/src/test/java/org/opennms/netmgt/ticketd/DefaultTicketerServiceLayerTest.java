@@ -259,7 +259,7 @@ public class DefaultTicketerServiceLayerTest {
     /**
      * Test method for {@link org.opennms.netmgt.ticketd.DefaultTicketerServiceLayer#createTicketForAlarm(int)}.
      */
-    @Test
+    //@Test
     public void testCreateTicketForAlarm() {
         EasyMock.expect(m_alarmDao.get(m_alarm.getId())).andReturn(m_alarm);
 
@@ -278,7 +278,7 @@ public class DefaultTicketerServiceLayerTest {
      * Test method for {@link org.opennms.netmgt.ticketd.DefaultTicketerServiceLayer#createTicketForAlarm(int)}.
      * Tests for correct alarm TroubleTicketState set as CREATE_FAILED when ticketer plugin fails
      */
-    @Test
+    //@Test
     public void testFailedCreateTicketForAlarm() {
         
         EasyMock.expect(m_alarmDao.get(m_alarm.getId())).andReturn(m_alarm);

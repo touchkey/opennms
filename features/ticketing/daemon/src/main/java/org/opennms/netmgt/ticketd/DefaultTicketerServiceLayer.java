@@ -29,6 +29,7 @@
 package org.opennms.netmgt.ticketd;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -40,6 +41,7 @@ import org.opennms.api.integration.ticketing.RelatedAlarmSummary;
 import org.opennms.api.integration.ticketing.Ticket;
 import org.opennms.api.integration.ticketing.Ticket.State;
 import org.opennms.netmgt.dao.api.AlarmDao;
+import org.opennms.netmgt.dao.api.AlarmEntityNotifier;
 import org.opennms.netmgt.events.api.EventIpcManager;
 import org.opennms.netmgt.events.api.EventIpcManagerFactory;
 import org.opennms.netmgt.model.OnmsAlarm;
@@ -72,8 +74,11 @@ public class DefaultTicketerServiceLayer implements TicketerServiceLayer, Initia
 
     @Autowired
     private AlarmDao m_alarmDao;
+    
+    @Autowired
+    private AlarmEntityNotifier alarmEntityNotifier;
 
-    private Plugin m_ticketerPlugin;
+	private Plugin m_ticketerPlugin;
     private EventIpcManager m_eventIpcManager;
 
     public DefaultTicketerServiceLayer() {
@@ -88,6 +93,10 @@ public class DefaultTicketerServiceLayer implements TicketerServiceLayer, Initia
     public void setAlarmDao(AlarmDao alarmDao) {
         m_alarmDao = alarmDao;
     }
+    
+    public void setAlarmEntityNotifier(AlarmEntityNotifier alarmEntityNotifier) {
+		this.alarmEntityNotifier = alarmEntityNotifier;
+	}
 
     /**
      * Spring functionality implemented to validate the state of the trouble ticket
@@ -213,7 +222,27 @@ public class DefaultTicketerServiceLayer implements TicketerServiceLayer, Initia
         }
 
         m_alarmDao.saveOrUpdate(alarm);
+     // Update the lastAutomationTime
+        updateLastAutomationTime(alarm, new Date());
 
+    }
+    
+    private void updateLastAutomationTime(OnmsAlarm alarm, Date now) {
+        /*final OnmsAlarm alarmInTrans = m_alarmDao.get(alarm.getId());
+        if (alarmInTrans == null) {
+            LOG.warn("Alarm disappeared: {}. lastAutomationTime will not be updated.", alarm);
+            return;
+        }
+
+        // Update the lastAutomationTime
+        final Date previousLastAutomationTime = alarmInTrans.getLastAutomationTime();
+        alarmInTrans.setLastAutomationTime(now);
+        alarmEntityNotifier.didUpdateLastAutomationTime(alarmInTrans, previousLastAutomationTime);*/
+    	
+    	final Date previousLastAutomationTime = alarm.getLastAutomationTime();
+    	alarm.setLastAutomationTime(now);
+        alarmEntityNotifier.didUpdateLastAutomationTime(alarm, previousLastAutomationTime);
+    	
     }
 
     private void populateRelatedAlarmsForTicket(Ticket ticket, Set<OnmsAlarm> relatedAlarms) {
