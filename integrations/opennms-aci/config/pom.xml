@@ -26,7 +26,7 @@
 						 <Import-Package>
                          org.opennms.core.xml,
                          org.springframework.core.io,
-                         org.opennms.netmgt.config.utils,
+                         org.opennms.netmgt.config.utils;resolution:=optional,
                          org.opennms.netmgt.config.southbound,
                          org.opennms.netmgt.dao.southbound,
                          org.slf4j.*,
