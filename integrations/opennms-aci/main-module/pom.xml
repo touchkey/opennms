@@ -42,7 +42,8 @@
                    		org.quartz.*,
                    		org.opennms.core.utils.*,
                    		com.google.common.cache.*,
-                   		org.opennms.netmgt.dao.jaxb.southbound.*
+                   		org.opennms.netmgt.dao.jaxb.southbound.*,
+                   		javax.websocket.*
 						</Import-Package>
 					</instructions>
 				</configuration>
