@@ -28,7 +28,20 @@
 						<!-- org.apache.felix.service.command, -->
 						<!-- * -->
                         org.opennms.core.xml.*,
-                        org.opennms.netmgt.events.api.*
+                        org.opennms.netmgt.events.api.*,
+                        org.slf4j,
+                        org.opennms.aci.rpc.rest.client,
+                        org.opennms.netmgt.config.southbound,
+                        org.glassfish.tyrus.client,
+                        org.opennms.aci.rpc.rest.client,
+                        org.opennms.core.criteria.*,
+                        org.opennms.core.logging.*,
+                   		org.opennms.netmgt.dao.api.*,
+                   		org.opennms.netmgt.model.*,
+                   		org.opennms.netmgt.xml.*,
+                   		org.quartz.*,
+                   		org.opennms.core.utils.*,
+                   		com.google.common.cache.*
 						</Import-Package>
 					</instructions>
 				</configuration>
