@@ -29,8 +29,8 @@
                          org.opennms.netmgt.config.utils,
                          org.opennms.netmgt.config.southbound,
                          org.opennms.netmgt.dao.southbound,
-                         org.slf4j,
-                         org.springframework.dao
+                         org.slf4j.*,
+                         org.springframework.dao.*
 						<!-- org.apache.felix.service.command,
 						* -->
 						<!-- org.opennms.netmgt.config.utils;resolution:=optional -->
