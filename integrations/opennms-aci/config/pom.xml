@@ -24,7 +24,8 @@
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}</Bundle-Version>
 						 <Import-Package>
-                                                 org.opennms.core.xml
+                         org.opennms.core.xml,
+                         org.springframework.core.io
 						<!-- org.apache.felix.service.command,
 						* -->
 						<!-- org.opennms.netmgt.config.utils;resolution:=optional -->

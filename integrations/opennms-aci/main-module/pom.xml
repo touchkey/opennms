@@ -27,7 +27,8 @@
 						<Import-Package>
 						<!-- org.apache.felix.service.command, -->
 						<!-- * -->
-                                                org.opennms.core.xml
+                        org.opennms.core.xml.*,
+                        org.opennms.netmgt.events.api.*
 						</Import-Package>
 					</instructions>
 				</configuration>
