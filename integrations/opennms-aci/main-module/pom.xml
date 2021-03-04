@@ -33,7 +33,6 @@
                         org.opennms.aci.rpc.rest.client,
                         org.opennms.netmgt.config.southbound,
                         org.glassfish.tyrus.client,
-                        org.opennms.aci.rpc.rest.client,
                         org.opennms.core.criteria.*,
                         org.opennms.core.logging.*,
                    		org.opennms.netmgt.dao.api.*,
