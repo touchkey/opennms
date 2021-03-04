@@ -1,0 +1,200 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.opennms.aci</groupId>
+		<artifactId>opennms-aci.parent</artifactId>
+		<version>27.0.5</version>
+	</parent>
+
+	<!-- Feature Definition -->
+	<artifactId>opennms-aci</artifactId>
+	<name>opennms-aci</name>
+	<description>Feature definition for opennms-aci</description>
+	<packaging>pom</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.opennms.maven.plugins</groupId>
+				<artifactId>features-maven-plugin</artifactId>
+				<configuration>
+					<bundles>
+						<bundle>mvn:org.opennms/opennms-config-model/${project.version}</bundle>
+
+						<!-- ACI dependencies -->
+						<bundle>wrap:mvn:org.glassfish.tyrus.bundles/tyrus-standalone-client/1.12</bundle>
+
+						<!-- ACI bundles -->
+						<bundle>mvn:org.opennms.aci/opennms-aci-config/${project.version}</bundle>
+						<bundle>mvn:org.opennms.aci/aci-rest/${project.version}</bundle>
+						<bundle>mvn:org.opennms.aci/org.opennms.aci.rpc.commands/${project.version}</bundle>
+						<bundle>mvn:org.opennms.aci/opennms-aci.main-module/${project.version}</bundle>
+						<bundle>mvn:org.opennms.aci/opennms-aci-provision/${project.version}</bundle>
+					</bundles>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>karaf-maven-plugin</artifactId>
+				<version>${karafVersion}</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>verify</id>
+						<phase>process-resources</phase>
+						<!-- <goals> -->
+						<!-- <goal>verify</goal> -->
+						<!-- </goals> -->
+						<configuration>
+							<javase>1.8</javase>
+							<descriptors>
+								<descriptor>mvn:org.apache.karaf.features/framework/${karafVersion}/xml/features</descriptor>
+								<descriptor>mvn:org.apache.karaf.features/standard/${karafVersion}/xml/features</descriptor>
+								<descriptor>file:${project.build.directory}/classes/opennms-aci-feature.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.opennms.aci</groupId>
+			<artifactId>aci-rest</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.opennms.aci</groupId>
+			<artifactId>opennms-aci.main-module</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.opennms.aci</groupId>
+			<artifactId>org.opennms.aci.rpc.commands</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>${json-simpleVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.searchbox</groupId>
+			<artifactId>jest-complete-osgi</artifactId>
+			<version>5.3.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${jestGsonVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version> <!-- opennms 3.3.2 -->
+		</dependency>
+		<dependency>
+			<groupId>org.opennms.core</groupId>
+			<artifactId>org.opennms.core.xml</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.httpcomponents</groupId> -->
+		<!-- <artifactId>httpcore-nio</artifactId> -->
+		<!-- <version>4.4.4</version> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore-osgi</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient-osgi</artifactId>
+		</dependency>
+
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.httpcomponents</groupId> -->
+		<!-- <artifactId>httpasyncclient-osgi</artifactId> -->
+		<!-- <version>${httpclientVersion}</version> -->
+		<!-- </dependency> -->
+
+		<!-- best match derived from httpasyncclient 4.0.2 compiled against httpclient 
+			4.3.5 httpcore 4.3.2 -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpasyncclient-osgi</artifactId>
+			<!-- <version>4.1.1</version> -->
+		</dependency>
+		<!-- Framework distribution -->
+		<dependency>
+			<groupId>org.apache.karaf.features</groupId>
+			<artifactId>framework</artifactId>
+			<version>${karafVersion}</version>
+			<type>kar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.opennms.integration.api</groupId>
+			<artifactId>karaf-features</artifactId>
+			<version>${opennmsApiVersion}</version>
+			<type>xml</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.opennms.core</groupId>
+			<artifactId>org.opennms.core.xml</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+
+	</dependencies>
+
+</project>

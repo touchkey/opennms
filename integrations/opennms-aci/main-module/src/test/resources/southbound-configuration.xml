@@ -1,0 +1,14 @@
+<southbound-configuration xmlns="http://xmlns.opennms.org/xsd/config/southbound-configuration">
+
+  <south-cluster>
+    <cluster-name>CTC-KC-VIII</cluster-name>
+    <cluster-type>CISCO-ACI</cluster-type>
+    <poll-duration-minutes>3</poll-duration-minutes>
+    <south-element host="localhost"
+             port="1000"
+             userid="svcOssAci"
+             password="kf3as=Nx"
+             reconnect-delay="1000"
+    />
+  </south-cluster>
+</southbound-configuration>

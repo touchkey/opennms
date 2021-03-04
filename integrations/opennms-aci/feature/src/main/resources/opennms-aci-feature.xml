@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features name="opennms-aci-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0">
+<feature name="opennms-aci" version="${project.version}" description="opennms-aci">
+        <details>Feature definition for opennms-aci</details>
+        <feature>opennms-config</feature>
+        <bundle>mvn:org.opennms/opennms-config-model/27.0.5</bundle>
+        <bundle>wrap:mvn:org.glassfish.tyrus.bundles/tyrus-standalone-client/1.12</bundle>
+        <bundle>mvn:org.opennms.aci/opennms-aci-config/27.0.5</bundle>
+        <bundle>mvn:org.opennms.aci/aci-rest/27.0.5</bundle>
+        <bundle>mvn:org.opennms.aci/org.opennms.aci.rpc.commands/27.0.5</bundle>
+        <bundle>mvn:org.opennms.aci/opennms-aci.main-module/27.0.5</bundle>
+        <bundle>mvn:org.opennms.aci/opennms-aci-provision/27.0.5</bundle>
+        <bundle>mvn:org.opennms.aci/aci-rest/27.0.5</bundle>
+        <bundle>mvn:org.opennms.aci/opennms-aci.main-module/27.0.5</bundle>
+        <bundle>mvn:org.opennms.aci/org.opennms.aci.rpc.commands/27.0.5</bundle>
+        <bundle>mvn:com.googlecode.json-simple/json-simple/1.1.1</bundle>
+        <bundle>mvn:io.searchbox/jest-complete-osgi/5.3.3</bundle>
+        <bundle>wrap:mvn:com.google.code.gson/gson/2.8.0</bundle>
+        <bundle>mvn:com.google.guava/guava/18.0</bundle>
+        <bundle>mvn:commons-lang/commons-lang/2.6</bundle>
+        <bundle>mvn:org.apache.commons/commons-lang3/3.4</bundle>
+        <bundle>mvn:org.apache.httpcomponents/httpcore-osgi/4.4.4</bundle>
+        <bundle>mvn:org.apache.httpcomponents/httpclient-osgi/4.5.2</bundle>
+        <bundle>mvn:org.apache.httpcomponents/httpasyncclient-osgi/4.1.3</bundle>
+    </feature>     
+</features>
