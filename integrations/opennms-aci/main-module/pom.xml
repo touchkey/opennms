@@ -43,7 +43,8 @@
                    		org.opennms.core.utils.*,
                    		com.google.common.cache.*,
                    		org.opennms.netmgt.dao.jaxb.southbound.*,
-                   		javax.websocket.*
+                   		javax.websocket.*,
+                                org.json.simple
 						</Import-Package>
 					</instructions>
 				</configuration>
